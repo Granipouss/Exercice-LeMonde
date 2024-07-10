@@ -13,7 +13,7 @@ const getFilms = async () => {
   return data.results as Film[];
 };
 
-const getFilm = async () => {
+const getFilm = async (id: string) => {
   const response = await fetch(`https://swapi.dev/api/films/${id}`);
   const data = await response.json();
   return data as Film;
@@ -28,5 +28,5 @@ export const useFilms = () =>
 export const useFilm = (id: string) =>
   useQuery({
     queryKey: ['films', id],
-    queryFn: getFilm,
+    queryFn: () => getFilm(id),
   });
